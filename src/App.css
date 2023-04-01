@@ -1,0 +1,102 @@
+:root {
+  --angle: 45deg;
+  --opacity: 0.5;
+}
+hr {
+  width: 80%;
+  height: 1px;
+  border-radius: 1px;
+  --border-size: 0.2rem;
+  border: var(--border-size) solid transparent;
+
+  /* Paint an image in the border */
+  border-image: conic-gradient(
+      from var(--angle),
+      #d53e33 0deg 90deg,
+      #fbb300 90deg 180deg,
+      #377af5 180deg 270deg,
+      #399953 270deg 360deg
+    )
+    1 stretch;
+  background: rgb(255 255 255 / var(--opacity));
+}
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes opacityChange {
+    to {
+      --opacity: 1;
+    }
+  }
+
+@keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+}
+
+hr {
+    animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+}
+
+button {
+  padding: 10px;
+  border: 1px solid rgb(59, 59, 223);
+  border-radius: 5px;
+}
+button:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.navList li {
+  float: left;
+  margin-left: 40px;
+  font-size: 15px;
+}
+.navList li .link {
+  color: rgb(122, 115, 115);
+  text-decoration: none;
+  align-items: left;
+}
+.navList li .link:hover {
+  color: #d53e33;
+}
+h4 {
+  margin: 10px;
+}
+p {
+  font-size: 18px;
+}
+
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+
