@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 /* 
     useContext() : Don gian hoa viec truyen du lieu 
@@ -15,7 +15,7 @@ export default function HookUseContext() {
   const [mounted, setMounted] = useState(false);
   const handleMounting = () => {
     setMounted(!mounted);
-  }
+  };
   return (
     <div>
       <h4>Hook useContext() </h4>
@@ -25,28 +25,32 @@ export default function HookUseContext() {
   );
 }
 
+const ColorContex = createContext();
 const ComponentA = () => {
   const [color, setColor] = useState("blue");
   const toggleColor = () => {
     setColor(color === "blue" ? "red" : "blue");
   };
   return (
-    <div>
-      <ComponentB color={color} />
-      <button onClick={toggleColor}>Change color</button>
-    </div>
+    <ColorContex.Provider value={color}>
+      <div>
+        <ComponentB color={color} />
+        <button onClick={toggleColor}>Change color</button>
+      </div>
+    </ColorContex.Provider>
   );
 };
 
-const ComponentB = ({color}) => {
+const ComponentB = () => {
   return (
     <div>
-      <ComponentC color = {color}/>
+      <ComponentC  />
     </div>
   );
 };
 
-const ComponentC = ({color}) => {
+const ComponentC = () => {
+  const color = useContext(ColorContex);
   console.log(color);
   return (
     <div>

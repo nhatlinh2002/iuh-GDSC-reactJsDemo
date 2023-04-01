@@ -24,23 +24,23 @@ export default function HookUseEffect() {
   return (
     <div>
       <button onClick={handleShow}>Show</button>
-      {show && <UpdateDom />}
+      {show && <TimerFunction />}
     </div>
   );
 };
 
 
-/* Theo dõi các thay đổi của phần tử DOM  */
+/* Theo dõi các thay đổi của phần tử DOM trong thẻ input  */
 const UpdateDom = () => {
   const [textInput, setTextInput] = useState("");
   const [textOuput, setTextOutput] = useState("");
 
   const handleChange = (event) => {
-    /*  */
+    setTextInput(event.target.value);
   } 
 
   useEffect(() => {
-    /* ... */
+    setTextOutput(textInput);
     console.log("Action...");
   });
   console.log("render");
@@ -60,13 +60,13 @@ const UpdateDom = () => {
 const TimerFunction = () => {
   const [count, setCount] = useState(0);
   useEffect(()=>{
-    const countId = setInterval(() => {
+    const countId = setTimeout(() => {
       setCount((preState)=> preState+1);
       console.log("counting...");
     }, 1000);
 
-    return () => clearInterval(countId);
-  },[]);
+    return () => clearTimeout(countId);
+  },[count]);
   console.log("re-render...");
   return (
     <div>
